@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+	<head th:replace="admin/_fragments :: head(~{::title})">
+		<!-- 移动端预览设置-->
+		<meta  charset="utf-8" name="viewport"  content="width=device-width, initial-scale=1.0"/>
+		<title>标签管理</title><br />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+		<link rel="stylesheet" href="../../static/css/myself.css" th:href="@{/css/myself.css}" />
+		<style>
+		</style>
+	</head>
+	<body>
+		
+		<!--  导航开始   -->
+		<nav th:replace="admin/_fragments :: menu(3)" class="ui inverted attached segment lf-pitch--mini lf-shadow-small" >
+			<div class="ui lf-container">
+				<div class="ui inverted secondary stackable menu">
+					<h2 class="ui teal header item">博客后台</h2>	
+					<a href="#" class="active m-item item lf-mobile-hide"><i class="mini home icon"></i> 博客</a>
+					<a href="#" class="m-item item lf-mobile-hide"><i class="mini idea icon"></i>分类</a>
+					<a href="#" class="m-item item lf-mobile-hide"><i class="mini tags icon"></i>标签</a>
+					<div class="right m-item lf-mobile-hide menu">
+						<div class="ui dropdown item">
+							<div class="text">
+								<img src="https://picsum.photos/100/100?image=1005" class="ui avatar image" />
+								刘凡
+							</div>
+							<i class="dropdown icon"></i>
+							<div class="menu">
+								<a href="#" class="item" >注销</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a href="#" class="ui menu toggle black icon button lf-top-righgt lf-mobile-show">
+				<i class="sidebar icon"></i>
+			</a>
+		</nav>
+		<!--二级导航开始 -->
+		<div class="ui attached pointing menu">
+			<div class="ui container">
+				<div class="right menu">
+					<a href="#" th:href="@{/admin/tags/input}" class="item">新增</a>
+					<a href="#" th:href="@{/admin/tags}" class="teal active item">列表</a>
+				</div>
+			</div>
+		</div>
+		<!--二级导航结束 -->
+		<!--  导航结束  -->
+		
+		<!--  中间内容开始  -->
+		 <div class="lf-container-small lf-padded-bigdistance">
+	 	    <div class="ui lf-container">
+	 	    		<div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+					        <i class="close icon"></i>
+					        <div class="header">提示：</div>
+					        <p th:text="${message}">恭喜，操作成功！</p>
+					</div>
+	 	    		<table class="ui compact teal table">
+	 	    			<thead>
+	 	    				<tr>
+	 	    					<th></th>
+	 	    					<th>名称</th>
+	 	    					<th>操作</th>
+	 	    				</tr>
+	 	    			</thead>
+	 	    			<tbody>
+	 	    				<tr th:each="tag,iterStat : ${page.content}">
+	 	    					<td th:text="${iterStat.count}">1</td>
+	 	    					<td th:text="${tag.name}">刻意练习清单</td>
+	 	    					<td>
+	 	    						<a href="#" th:href="@{/admin/tags/{id}/input(id=${tag.id})}" class="ui mini teal basic button ">编辑</a>
+	 	    						<a href="#" th:href="@{/admin/tags/{id}/delete(id=${tag.id})}" class="ui mini red  basic button ">删除</a>
+	 	    					</td>
+	 	    				</tr>
+	 	    			</tbody>
+	 	    			<tfoot>
+	 	    				<tr>
+	 	    					<th colspan="6" >
+	 	    						<div class="ui mini pagination menu" th:if="${page.totalPages}>1">
+									<a th:href="@{/admin/tags(page=${page.number}-1)}" class="item" th:unless="${page.first}">上一页</a>
+									<a th:href="@{/admin/tags(page=${page.number}+1)}" class="item" th:unless="${page.last}">下一页</a>
+	 	    						</div>
+	 	    						<a th:href="@{/admin/tags/input}" href="#" class="ui mini right floated teal basic button">新增</a>
+	 	    					</th>
+	 	    				</tr>
+	 	    			</tfoot>
+	 	    		</table>
+	 	    		
+	 	    </div>
+		 </div>
+		<!--  中间内容结束  -->
+		<br>
+		<br>
+		<!-- 底部开始  -->
+		<footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment lf-padded-maxdistance">
+			<div class="ui center aligned container stackable">
+				<div class="ui inverted divided grid stackable">
+					<div class="three wide column">
+						<div class="ui inverted link list">
+							<div class="item">
+								<img src="../static/images/lf-wechat.jpg" class="ui rounded image " alt="关注我" style="width:110px"/>
+							</div>
+						</div>
+					</div>
+					<div class="three wide column">
+						<h4 class="ui inverted header lf-text-thin lf-text-space lf-text-lined ">最新博客</h4>
+						<div id="newblog-container">
+							<div class="ui inverted link list" th:fragment="newBlogList">
+								<a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog : ${newBlogs}" th:text="${blog.title}">支持自定义定义</a> 
+							</div>
+						</div>
+					</div>
+					<div class="three wide column">
+						<h4 class="ui inverted header lf-text-thin lf-text-space lf-text-lined ">联系我</h4>
+						<div class="ui inverted link list">
+							<a href="#" class="item">Email: 2740640064@qq.com</a>
+							<a href="#" class="item">QQ: 2740640064</a>
+						</div>
+					</div>
+					<div class="seven wide column">
+						<h4 class="ui inverted header lf-text-thin lf-text-space lf-text-lined ">最新博客</h4>
+						<p class="lf-text-thin lf-text-space lf-text-lined lf-opacity-mini">构建工具，性能日志记录，支持自定义定义，多层次的主题继承 - 开发人员的梦想。</p>
+					</div>
+				</div>
+				<div class="ui inverted section divider "></div>
+				<p class="lf-text-thin lf-text-space lf-text-lined lf-opacity-tiny">©2019Baidu 移动开放平台|服务协议|权利声明|版本更新|帮助中心|问题反馈|版权投诉</p>
+			</div>
+		</footer>
+		<!-- 底部结束 -->
+	<script type="text/javascript" src="../../static/js/jquery-1.9.1.min.js" th:src="@{/js/jquery-1.9.1.min.js}"></script>		
+	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>	
+	
+	<script>
+		$(function(){
+			$('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
+		});
+		$('.menu.toggle').click(function(){
+			$('.m-item').toggleClass('lf-mobile-hide');
+		});
+		
+		$('.ui.dropdown').dropdown({
+		});
+
+	    //消息提示关闭初始化
+	    $('.message .close')
+	      .on('click', function () {
+	        $(this)
+	          .closest('.message')
+	          .transition('fade');
+	      });
+		
+	</script>
+	</body>
+</html>
