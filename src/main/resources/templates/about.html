@@ -40,7 +40,8 @@
 		 	     <div class="ui stackable grid">
 		 	     	<div class="eleven wide column">
 		 	     		<div class="ui segment">
-		 	     			<img src="https://picsum.photos/800/600?image=2"  class="ui rounded image"/>
+		 	     			<!-- <img src="https://picsum.photos/800/600?image=2"  class="ui rounded image"/> -->
+		 	     			<img src="../static/images/header-background.jpg" th:src="@{/images/header-background.jpg}"  class="ui rounded image"/>
 		 	     		</div> 
 		 	     	</div>
 		 	     	<div class="five wide column">
@@ -74,12 +75,12 @@
 		 	     			<div class="ui teal left pointing basic label lf-margin-tb-tiny">redis</div>
 		 	     		</div>
 		 	     		<div class="ui bottom center aligned attached segment">
-		 	     			<a class="ui circular icon button"><i class="github icon"></i></a>
+		 	     			<a href="https://github.com/TowerLiuFan" target="_blank" class="ui circular icon button"><i class="github icon"></i></a>
 		 	     			<a class="ui wechat circular icon button"><i class="weixin icon"></i></a>
 		 	     			<a class="ui qq circular icon button" data-content="2740640064"><i class="qq icon"></i></a>
 		 	     		</div>
 		 	     		<div class="ui wechat-qr flowing popup  transition hidden ">
-		 	     			<img  src="../static/images/lf-wechat.jpg" class="ui rounded image" style="width: 100px;"/>
+		 	     			<img  src="../static/images/lf-wechat.jpg" th:src="@{/images/lf-wechat.jpg}" class="ui rounded image" style="width: 100px;z-index:100  "/>
 		 	     		</div>
 		 	     	</div>
 		 	     </div>
@@ -139,7 +140,7 @@
 		});
 		$('.wechat').popup({
 			popup : $(".wechat-qr"),
-			position : 'bottom center'
+			position : 'top center'
 		})
 		
 		
